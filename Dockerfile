@@ -30,19 +30,19 @@ RUN set -eux; \
   DEBIAN_FRONTEND=noninteractive apt-get remove --purge --auto-remove -y; \
   rm -rf /var/lib/apt/lists/*
 
-WORKDIR /tmp
-
 COPY deploy-checkbox.sh /tmp/deploy-checkbox.sh
 COPY start-checkbox.sh /tmp/start-checkbox.sh
 
+WORKDIR /tmp
 RUN wget https://github.com/canonical/checkbox/archive/refs/tags/v$CHECKBOX_VERSION.tar.gz; \
-    tar xvf v$CHECKBOX_VERSION.tar.gz; \
-    cd checkbox-$CHECKBOX_VERSION; \
+    mkdir -p checkbox; \
+    tar xvf v$CHECKBOX_VERSION.tar.gz -C checkbox --strip-components 1; \
+    cd checkbox; \
     /tmp/deploy-checkbox.sh; \
     cd /tmp; \
     rm -rf v$CHECKBOX_VERSION.tar.gz;
 
-WORKDIR /tmp/checkbox-$CHECKBOX_VERSION
+WORKDIR /tmp/checkbox
 
 EXPOSE 18871
 ENTRYPOINT [ "/tmp/start-checkbox.sh" ]

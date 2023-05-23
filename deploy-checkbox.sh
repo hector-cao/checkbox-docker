@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo "Deploying checkbox ..."
+
 exec &> /dev/null
 
 # pwd should be inside checkbox source folder
