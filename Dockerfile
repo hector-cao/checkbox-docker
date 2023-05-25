@@ -30,6 +30,9 @@ RUN set -eux; \
   DEBIAN_FRONTEND=noninteractive apt-get remove --purge --auto-remove -y; \
   rm -rf /var/lib/apt/lists/*
 
+# needed for restart strategy detection
+RUN mkdir -p /etc/xdg/autostart/
+
 COPY deploy-checkbox.sh /tmp/deploy-checkbox.sh
 COPY start-checkbox.sh /tmp/start-checkbox.sh
 
