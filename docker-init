@@ -1,0 +1,7 @@
+#!/bin/bash
+trap "exit" TERM
+
+while true
+do
+    sleep 1
+done

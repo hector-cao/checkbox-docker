@@ -4,6 +4,7 @@ FROM ubuntu:$UBUNTU_RELEASE
 ARG CHECKBOX_VERSION=2.6
 
 ENV TZ UTC
+ENV HOME /home/ubuntu
 
 RUN useradd -ms /bin/bash ubuntu
 
@@ -31,7 +32,12 @@ RUN set -eux; \
   rm -rf /var/lib/apt/lists/*
 
 # needed for restart strategy detection
-RUN mkdir -p /etc/xdg/autostart/
+RUN mkdir -p /etc/xdg/autostart/ && echo "#!/bin/bash\nexit 0" > /usr/bin/systemctl && chmod a+x /usr/bin/systemctl
+
+RUN mkdir -p /home/ubuntu/.config/
+RUN mkdir -p /root/.config/
+
+COPY docker-init /usr/sbin/init
 
 COPY deploy-checkbox.sh /tmp/deploy-checkbox.sh
 COPY start-checkbox.sh /tmp/start-checkbox.sh

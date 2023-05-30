@@ -1,5 +1,8 @@
 #!/bin/bash
 
+[ -d $PWD/checkbox-ng ] || exit 0
+[ -d $PWD/checkbox-support ] || exit 0
+
 echo "Deploying checkbox ..."
 
 exec &> /dev/null
