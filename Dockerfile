@@ -1,4 +1,4 @@
-FROM ubuntu:jammy
+FROM ubuntu:bionic
 
 ARG CHECKBOX_VERSION=2.6
 
