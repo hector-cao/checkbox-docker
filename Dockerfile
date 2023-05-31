@@ -4,7 +4,6 @@ FROM ubuntu:$UBUNTU_RELEASE
 ARG CHECKBOX_VERSION=2.6
 
 ENV TZ UTC
-ENV HOME /home/ubuntu
 
 RUN useradd -ms /bin/bash ubuntu
 
