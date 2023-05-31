@@ -37,7 +37,7 @@ jobs:
         tags: |
           hectorcao84/checkbox:${{ steps.extract_tag.outputs.tag }}
           ghcr.io/petitfou/checkbox:${{ steps.extract_tag.outputs.tag }}
-        #push: ${{ github.event_name == 'push' || github.event.pull_request.merged == true }}
+        push: true
 
     - name: Image digest
       run: echo ${{ steps.docker_build.outputs.digest }}
