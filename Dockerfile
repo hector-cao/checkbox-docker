@@ -1,4 +1,4 @@
-FROM ubuntu:jammy
+FROM ubuntu:focal
 
 ARG CHECKBOX_VERSION=2.6
 
