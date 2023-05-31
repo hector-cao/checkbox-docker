@@ -2,9 +2,8 @@ name: Docker Image CI
 
 on:
   push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+    tags:
+      - '*'
 
 jobs:
 
@@ -14,6 +13,10 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+    - name: Extract tag name
+      shell: bash
+      run: echo "tag=${GITHUB_REF#refs/*/}" >> $GITHUB_OUTPUT
+      id: extract_tag
     - name: Login to DockerHub
       uses: docker/login-action@v2
       with:
@@ -32,10 +35,9 @@ jobs:
         context: ./
         # Note: tags has to be all lower-case
         tags: |
-          hectorcao84/checkbox:2.6
-          ghcr.io/petitfou/checkbox:2.6
-        # build on feature branches, push only on main branch
-        push: ${{ github.ref == 'refs/heads/main' }}
+          hectorcao84/checkbox:${{ steps.extract_tag.outputs.tag }}
+          ghcr.io/petitfou/checkbox:${{ steps.extract_tag.outputs.tag }}
+        #push: ${{ github.event_name == 'push' || github.event.pull_request.merged == true }}
 
     - name: Image digest
       run: echo ${{ steps.docker_build.outputs.digest }}

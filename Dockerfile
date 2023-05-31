@@ -1,5 +1,4 @@
-ARG UBUNTU_RELEASE=jammy
-FROM ubuntu:$UBUNTU_RELEASE
+FROM ubuntu:jammy
 
 ARG CHECKBOX_VERSION=2.6
 
@@ -7,6 +6,7 @@ ENV TZ UTC
 
 RUN useradd -ms /bin/bash ubuntu
 
+# --no-install-recommends : allows to reduce image size
 RUN set -eux; \
     apt-get update; \
    DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
