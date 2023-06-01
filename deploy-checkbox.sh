@@ -10,6 +10,10 @@ exec &> /dev/null
 # pwd should be inside checkbox source folder
 mkdir -p /home/ubuntu/checkbox
 
+# devel mode
+# -e : install python module in editable mode
+# it will install a egg-link file that contains the path to local folder
+# example : /usr/local/lib/python3.10/dist-packages/checkbox-ng.egg-link contains : /tmp/checkbox/checkbox-ng
 (cd checkbox-ng && python3 -m pip install -e .)
 (cd checkbox-support && python3 -m pip install -e .)
 
